@@ -4,23 +4,27 @@ import Register from './src/screens/register/Register';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DrawerNavigation from './src/screens/drawer/DrawerNavigation';
+import MyTab from './src/component/bottomNav/MyTab';
+
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
-    const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState(true);
+
+
+
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {
-                    !login &&
+                {!login && (
+                    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+                )}
 
-                    <Stack.Screen options={{ headerShown: false }} name="Login" component={Login} />
-                }
-
-                <Stack.Screen options={{ headerShown: false }} name="Drawer" component={DrawerNavigation} />
-                <Stack.Screen options={{ headerShown: false }} name="Register" component={Register} />
+                <Stack.Screen name="Drawer" component={DrawerNavigation} options={{ headerShown: false }} />
+                {/* <Stack.Screen name="HomeTabs" component={MyTab} options={{ headerShown: false }} /> */}
+                <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
 
             </Stack.Navigator>
         </NavigationContainer>

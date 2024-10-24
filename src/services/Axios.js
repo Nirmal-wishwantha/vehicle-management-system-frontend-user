@@ -1,0 +1,10 @@
+import axios from "axios";
+
+// const token = localStorage.getItem('loig');
+
+const instance = axios.create({
+    baseURL: 'http://192.168.43.162:8080',
+    timeout: 5000,
+    // headers: {Authorization: `Bearer ${token}`}
+  });
+  export default instance;
