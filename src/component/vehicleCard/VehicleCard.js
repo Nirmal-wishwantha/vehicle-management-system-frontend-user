@@ -6,7 +6,7 @@ export default function VehicleCard({ brand, model, image, price, reserve, id, d
     return (
         <View style={styles.vehicleCardBody}>
             <Card style={styles.cardContainer}>
-                {/* Add the image */}
+
                 <Card.Cover source={{ uri: image }} style={styles.cardImg} />
 
                 <Card.Content>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     vehicleCardBody: {
         marginVertical: 15,
         marginHorizontal: 10,
-        // marginBottom:75
+        // marginBottom:75 
     },
     cardContainer: {
         margin: 10,

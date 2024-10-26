@@ -9,26 +9,51 @@ const Register = () => {
     const navigation = useNavigation();
 
 
-    const[useNmae,setUserName]=useState();
-    const[email,setEmail]=useState();
-    const[password,setPassword]=useState();
-    const[comPassword,setComPassword]=useState();
+    const [useName, setUserName] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [comPassword, setComPassword] = useState();
 
 
-    const registerPage=()=>{
-        const data ={
-            name:useNmae,
-            email:email,
-            password:password,
+    const registerPage = () => {
+
+        const data = {
+            name: useName,
+            email: email,
+            password: password,
         }
-        instance.post('/user/register',data)
-        .then((res)=>{
-            console.log(res);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
+        instance.post('/user/register', data)
+            .then((res) => {
+
+                Toast.show({
+                    text1: 'Register Successful',
+                    text2: 'Welcome Login..!',
+                    type: 'success',
+                });
+
+                setTimeout(() => {
+                    navigation.navigate('Login')
+                }, 2000);
+
+                console.log("register success full"+ res);
+
+            })
+            .catch((err) => {
+
+                Toast.show({
+                    text1: 'Register Successful',
+                    text2: 'Welcome Login..!',
+                    type: 'success',
+                });
+                console.log("register success full"+ err);
+            })
+
+
     }
+
+
+
+
 
 
     return (
@@ -41,7 +66,7 @@ const Register = () => {
                 mode="outlined"
                 style={styles.input}
                 autoCapitalize="none"
-                onChange={setUserName}
+                onChangeText={(text) => setUserName(text)}
             />
 
             {/* Email */}
@@ -51,7 +76,7 @@ const Register = () => {
                 style={styles.input}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                onChange={setEmail}
+                onChangeText={(text) => setEmail(text)}
             />
 
             {/* Password */}
@@ -61,7 +86,7 @@ const Register = () => {
                 secureTextEntry
                 style={styles.input}
                 right={<TextInput.Icon name="eye" />}
-                onChange={setPassword}
+                onChangeText={(text) => setPassword(text)}
             />
 
             {/* Confirm Password */}
@@ -71,7 +96,7 @@ const Register = () => {
                 secureTextEntry
                 style={styles.input}
                 right={<TextInput.Icon name="eye" />}
-                onChange={setComPassword}
+                onChangeText={(text) => setComPassword(text)}
             />
 
             <View style={styles.buttonBody}>

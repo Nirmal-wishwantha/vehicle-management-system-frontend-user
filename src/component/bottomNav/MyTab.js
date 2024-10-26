@@ -4,13 +4,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../../screens/home/Home';
 import About from '../../screens/about/About';
 import MyReservation from '../../screens/my reseve/MyReservation';
+import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import Setting from '../../screens/setting/Setting';
 
 const Tab = createBottomTabNavigator();
 
 function MyTab() {
+
+  const navigation = useNavigation();
+
   return (
+
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -23,6 +29,8 @@ function MyTab() {
             iconName = focused ? 'information-circle' : 'information-circle-outline';
           } else if (route.name === 'Reservation') {
             iconName = focused ? 'calendar' : 'calendar-outline';
+          }else if (route.name === 'Setting') {
+            iconName = focused ? 'settings' : 'settings-outline';
           }
 
           // Return the Icon component from react-native-vector-icons
@@ -46,8 +54,12 @@ function MyTab() {
       <Tab.Screen name="Reservation" component={MyReservation} options={{headerShown:false}}/>
 
       <Tab.Screen name="About" component={About} options={{headerShown:false}}/>
+
+      <Tab.Screen name="Setting" component={Setting} options={{headerShown:false}}/>
+
       
     </Tab.Navigator>
+    
   );
 }
 

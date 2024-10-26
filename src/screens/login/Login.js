@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import instance from '../../services/Axios';
+import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Login = () => {
@@ -12,25 +14,50 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+
     const loginPage = () => {
 
-        const data = {
-            email: email,
-            password: password
-        };
-        instance.post('/user/login', data)
+       
+            const data = {
+                email: email,
+                password: password
+            };
+            console.log(data);
+            instance.post('/user/login', data)
 
-            .then((res) => {
-                console.log(" login succes " + res);
-            })
+                .then(async (res) => {
+                    const { token, id } = res.data;
 
-            .catch((err) => {
-                console.log("login error " + err);
-            })
+                    await AsyncStorage.setItem('token', token);
+                    await AsyncStorage.setItem('userId', id.toString());
+                    Toast.show({
+                        text1: 'Login Successful',
+                        text2: 'Welcome back!',
+                        type: 'success',
+                    });
+
+                    setTimeout(() => {
+                        navigation.navigate('Drawer');
+
+                    }, 1000);
+
+                    console.log(" login succes " + res.data.token);
+                })
+
+                .catch((err) => {
+
+                    Toast.show({
+                        text1: 'Login Failed',
+                        text2: 'Please check your credentials.',
+                        type: 'error',
+                    });
+                    console.log("login error" + err);
+                })
+        
+
+
+
     }
-
-
-
 
     return (
 
@@ -43,7 +70,7 @@ const Login = () => {
                 style={styles.input}
                 keyboardType="email-address"
                 autoCapitalize="none"
-                onChange={(e) => setEmail(e.target.value)}
+                onChangeText={(text) => setEmail(text)}
 
             />
 
@@ -53,7 +80,7 @@ const Login = () => {
                 secureTextEntry
                 style={styles.input}
                 right={<TextInput.Icon name="eye" />}
-                onChange={(e) => setPassword(e.target.value)}
+                onChangeText={(text) => setPassword(text)}
 
             />
 
@@ -73,26 +100,7 @@ const Login = () => {
                 Don't have an account? <Text style={styles.registerLink} onPress={() => navigation.navigate('Register')}>Sign Up</Text>
             </Text>
 
-
-
-            <View style={{ alignItems: 'center' }}>
-                <TouchableOpacity style={styles.btnBody} onPress={() => navigation.navigate('Drawer')}>
-                    <Text style={styles.btnText}>
-                        Home
-                    </Text>
-                </TouchableOpacity>
-            </View>
-
-
-
         </View>
-
-
-
-
-
-
-
 
     );
 };

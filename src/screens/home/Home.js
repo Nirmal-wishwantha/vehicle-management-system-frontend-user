@@ -33,35 +33,38 @@ export default function Home() {
 
     return (
         <View>
-            {/* <Appbar.Header>
-                <Appbar.BackAction onPress={() => navigate.navigate('Login')} />
-                <Appbar.Content title="Login" />
-            </Appbar.Header> */}
+
+
+            <View style={styles.header}>
+                <Text style={styles.headerTitle}>Choose Your Vehicle</Text>
+            </View>
 
             <ScrollView>
                 <View style={styles.pageBody}>
-                    {vehicles.map((vehicle) => (
-                        <VehicleCard
-                            key={vehicle.id}
-                            id={vehicle.id}
-                            brand={vehicle.brand}
-                            model={vehicle.model}
-                            price={vehicle.price}
-                            description={vehicle.description}
-                            image={vehicleImages[vehicle.id] || 'https://example.com/default-image.jpg'}  // Fallback image
-                        />
-                    ))}
+                    {
+                        vehicles.map((vehicle) => (
+                            <VehicleCard
+                                key={vehicle.id}
+                                id={vehicle.id}
+                                brand={vehicle.brand}
+                                model={vehicle.model}
+                                price={vehicle.price}
+                                description={vehicle.description}
+                                image={vehicleImages[vehicle.id] || 'https://example.com/default-image.jpg'}  // Fallback image
+                            />
+                        ))
+                    }
                 </View>
 
             </ScrollView>
 
-            
-          
-            
+
+
+
             {/* <MyTab/> */}
-           
-               
-        
+
+
+
 
         </View>
     );
@@ -70,7 +73,20 @@ export default function Home() {
 const styles = StyleSheet.create({
 
     pageBody: {
-        marginBottom: 80
+        marginBottom: 30
+    },
+
+    header: {
+        paddingVertical: 10,
+        backgroundColor: '#6e8efb',
+        borderRadius: 8,
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    headerTitle: {
+        fontSize: 28,
+        color: '#fff',
+        fontWeight: 'bold',
     }
 
 });

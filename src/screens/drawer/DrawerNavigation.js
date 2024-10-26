@@ -9,17 +9,15 @@ const Drawer = createDrawerNavigator();
 
 export default function DrawerNavigation() {
     return (
+
+
+
+
         <Drawer.Navigator>
-            {/* <Drawer.Screen name="HomeTabs" component={MyTab} options={{ headerShown: false }} />
-            <Drawer.Screen name="About" component={About} options={{ headerShown: false }} />
-            <Drawer.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
-
-
-            <Drawer.Screen name="All Page" component={MyTab}/>
-            {/* <Drawer.Screen name="Home" component={Home} /> */}
-            <Drawer.Screen name="reservation" component={MyReservation} />
-            <Drawer.Screen name="About" component={About} />
-            
+            <Drawer.Screen name="All Page" component={MyTab} />
+            <Drawer.Screen name="reservation" component={MyTab} />
+            <Drawer.Screen name="About" component={MyTab} />
         </Drawer.Navigator>
+        
     )
 }

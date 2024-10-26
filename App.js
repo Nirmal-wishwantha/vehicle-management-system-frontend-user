@@ -5,13 +5,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DrawerNavigation from './src/screens/drawer/DrawerNavigation';
 import MyTab from './src/component/bottomNav/MyTab';
+import Toast from 'react-native-toast-message';
 
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
-    const [login, setLogin] = useState(true);
+    const [login, setLogin] = useState(false);
 
 
 
@@ -23,10 +24,9 @@ export default function App() {
                 )}
 
                 <Stack.Screen name="Drawer" component={DrawerNavigation} options={{ headerShown: false }} />
-                {/* <Stack.Screen name="HomeTabs" component={MyTab} options={{ headerShown: false }} /> */}
                 <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
-
             </Stack.Navigator>
+            <Toast/>
         </NavigationContainer>
     );
 }
