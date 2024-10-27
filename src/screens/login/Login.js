@@ -38,10 +38,9 @@ const Login = () => {
 
                     setTimeout(() => {
                         navigation.navigate('Drawer');
-
                     }, 1000);
 
-                    console.log(" login succes " + res.data.token);
+                    console.log(" login succes " + res);
                 })
 
                 .catch((err) => {

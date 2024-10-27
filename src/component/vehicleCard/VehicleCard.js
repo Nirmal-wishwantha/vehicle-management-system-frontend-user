@@ -1,8 +1,17 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import { Button, Card, Text } from 'react-native-paper';
+import { Button, Card, Modal, Text } from 'react-native-paper';
+import ReserveModel from '../reserve model/ReserveModel';
+// import { Button, Card, Text, Dialog, Portal, Provider as PaperProvider } from 'react-native-paper';
 
-export default function VehicleCard({ brand, model, image, price, reserve, id, description }) {
+
+export default function VehicleCard({ brand, model, image, price, id, description,reserve }) {
+
+    const [visible, setVisible] = React.useState(false);
+
+    const showDialog = () => setVisible(true);
+    const hideDialog = () => setVisible(false);
+     
     return (
         <View style={styles.vehicleCardBody}>
             <Card style={styles.cardContainer}>
@@ -17,17 +26,29 @@ export default function VehicleCard({ brand, model, image, price, reserve, id, d
 
                 <Card.Actions>
                     <Text variant="bodyMedium" style={styles.priceText}>Price: {price}</Text>
-                    <Button mode="contained" onPress={reserve}>Reserve</Button>
-                    <Button mode="outlined">Ok</Button>
+
+                       <View>
+                       <Button mode="contained" onPress={showDialog}
+                       >Reserve</Button>
+                       </View>
+                  
+                    
                 </Card.Actions>
 
                 <Card.Content>
                     <Text variant="bodyMedium">Description: {description}</Text>
                 </Card.Content>
             </Card>
+            <ReserveModel visible={visible} hideDialog={hideDialog} handleReserve={reserve} />
+
+        
         </View>
     );
 }
+
+
+
+
 
 const styles = StyleSheet.create({
     vehicleCardBody: {

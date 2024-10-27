@@ -1,11 +1,10 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { Appbar } from 'react-native-paper';
 import VehicleCard from '../../component/vehicleCard/VehicleCard';
 import instance from '../../services/Axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-// import MyTab from '../../component/bottomNav/MyTab';
+import Toast from 'react-native-toast-message';
 
 
 export default function Home() {
@@ -30,6 +29,32 @@ export default function Home() {
     };
 
 
+    const reserveVehicle = (id, reservationData) => {
+        instance.post(`/reserve/${id}`, reservationData)
+            .then((res) => {
+                Toast.show({
+                    text1: 'Reservation Successful..!',
+                    text2: 'Welcome back!',
+                    type: 'success',
+                });
+
+                setTimeout(() => {
+                    // hideDialog();
+                }, 2000);
+               
+                console.log("Reservation success:", res.data);
+            })
+            .catch((err) => {
+                Toast.show({
+                    text1: 'Reservation Successful..!',
+                    text2: 'Welcome back!',
+                    type: 'error',
+                });
+
+                console.log("Reservation failed:", err);
+            });
+    };
+
 
     return (
         <View>
@@ -50,8 +75,11 @@ export default function Home() {
                                 model={vehicle.model}
                                 price={vehicle.price}
                                 description={vehicle.description}
-                                image={vehicleImages[vehicle.id] || 'https://example.com/default-image.jpg'}  // Fallback image
+                                image={vehicleImages[vehicle.id] || 'https://example.com/default-image.jpg'}
+                                reserve={(reservationData) => reserveVehicle(vehicle.id, reservationData)}
+                                // hideDialog={()=>hideDialog()}
                             />
+
                         ))
                     }
                 </View>
@@ -81,7 +109,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#6e8efb',
         borderRadius: 8,
         alignItems: 'center',
-        marginBottom: 20,
+        // marginBottom: 20,
+        margin: 16
     },
     headerTitle: {
         fontSize: 28,
