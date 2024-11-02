@@ -16,7 +16,7 @@ export default function VehicleCard({ brand, model, image, price, id, descriptio
         <View style={styles.vehicleCardBody}>
             <Card style={styles.cardContainer}>
 
-                <Card.Cover source={{ uri: image }} style={styles.cardImg} />
+                <Card.Cover source={{uri:'http://192.168.43.162:8080/vehicle/get/image/'+id}} style={styles.cardImg} />
 
                 <Card.Content>
                     <Text variant="titleLarge">ID: {id}</Text>

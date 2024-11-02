@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import VehicleCard from '../../component/vehicleCard/VehicleCard';
 import instance from '../../services/Axios';
@@ -41,7 +41,7 @@ export default function Home() {
                 setTimeout(() => {
                     // hideDialog();
                 }, 2000);
-               
+
                 console.log("Reservation success:", res.data);
             })
             .catch((err) => {
@@ -77,7 +77,7 @@ export default function Home() {
                                 description={vehicle.description}
                                 image={vehicleImages[vehicle.id] || 'https://example.com/default-image.jpg'}
                                 reserve={(reservationData) => reserveVehicle(vehicle.id, reservationData)}
-                                // hideDialog={()=>hideDialog()}
+                            // hideDialog={()=>hideDialog()}
                             />
 
                         ))
