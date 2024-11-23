@@ -8,10 +8,14 @@ import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import Setting from '../../screens/setting/Setting';
+import { useRoute } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 function MyTab() {
+
+  const routes = useRoute();
+  console.log(routes.name);
 
   const navigation = useNavigation();
 
@@ -22,6 +26,8 @@ function MyTab() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
+          // console.log(route.name)
+          // console.log(focused)
           // Choose the icon based on the route name
           if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
@@ -33,11 +39,10 @@ function MyTab() {
             iconName = focused ? 'settings' : 'settings-outline';
           }
 
-          // Return the Icon component from react-native-vector-icons
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato', // Color when the tab is active
-        tabBarInactiveTintColor: 'gray', // Color when the tab is inactive
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
         tabBarStyle: {
           backgroundColor: '#f8f8f8', // Tab bar background color
           borderTopWidth: 0,

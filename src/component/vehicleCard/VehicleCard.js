@@ -5,7 +5,7 @@ import ReserveModel from '../reserve model/ReserveModel';
 // import { Button, Card, Text, Dialog, Portal, Provider as PaperProvider } from 'react-native-paper';
 
 
-export default function VehicleCard({ brand, model, image, price, id, description,reserve }) {
+export default function VehicleCard({ brand, model, price, id, description,reserve }) {
 
     const [visible, setVisible] = React.useState(false);
 
@@ -19,9 +19,9 @@ export default function VehicleCard({ brand, model, image, price, id, descriptio
                 <Card.Cover source={{uri:'http://192.168.43.162:8080/vehicle/get/image/'+id}} style={styles.cardImg} />
 
                 <Card.Content>
-                    <Text variant="titleLarge">ID: {id}</Text>
-                    <Text variant="titleLarge">Brand: {brand}</Text>
-                    <Text variant="bodyMedium">Model: {model}</Text>
+                    <Text variant="titleLarge">NO : {id}</Text>
+                    <Text variant="titleLarge">Brand : {brand}</Text>
+                    <Text variant="bodyMedium">Model : {model}</Text>
                 </Card.Content>
 
                 <Card.Actions>
